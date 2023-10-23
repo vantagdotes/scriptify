@@ -1,5 +1,11 @@
 # WordPress Script Insertion Plugin "Scriptify"
 
+Version: 1.0.0
+License: GPL v3.0
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+## Description
+
 This is a simple WordPress plugin that allows you to add content or scripts to the head, body, or footer of your website quickly and easily. This is useful for inserting scripts from services like Google Analytics or other custom scripts on your WordPress website.
 
 ## Features
