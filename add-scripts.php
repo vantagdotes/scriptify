@@ -1,0 +1,67 @@
+<?php
+/**
+* Plugin Name: Scripts in Head/Footer/Body
+* Plugin URI: https://www.github.com/josejtax
+* Description: Allows you to add scripts in the footer, body or header without the need for extensive coding.
+* Version: 0.1
+* Author: jmfernandez.dev
+* Author URI: mailto:hola@jmfernandez.dev
+**/
+
+/*Añade al menu del backend la opcion del plugin*/
+function vantages_add_backend(){
+    add_menu_page( 'Scriptify', 'Scriptify', 'manage_options', 'scriptify', 'front_scriptify' );
+}
+
+add_action('admin_menu', 'vantages_add_backend');
+
+/*Muestra en el backend las opciones disponibles del plugin*/
+function front_scriptify() {
+	echo "<h1>Scriptify</h1>";
+	echo "<hr style='border: 1px solid #000'>";
+	 if ($_POST) {
+		update_option( 'script_head', $_POST["script_head_options"], '', 'yes' );
+		update_option( 'script_body', $_POST["script_body_options"], '', 'yes' );
+		update_option( 'script_footer', $_POST["script_footer_options"], '', 'yes' );
+	 }
+
+	 ?>
+		<form action="#" method="post">
+			<h3>Head</h3>
+			<textarea style='width: 50%; height: 300px;' value="<?= get_option( 'script_head', '') ?>" name="script_head_options"><?= get_option('script_head', '') ?></textarea>
+			<hr>
+
+            <h3>Body</h3>
+			<textarea style='width: 50%; height: 300px;' value="<?= get_option( 'script_body', '') ?>" name="script_body_options"><?= get_option('script_body', '') ?></textarea>
+            <hr><br>
+
+            <h3>Footer</h3>
+			<textarea style='width: 50%; height: 300px;' value="<?= get_option( 'script_footer', '') ?>" name="script_footer_options"><?= get_option('script_footer', '') ?></textarea>
+            <br>
+			<input type="submit" value="SAVE">
+		</form>
+	<?php
+}
+
+/* Añade el script en el head */
+function add_scriptify_head() {
+	echo "\n <!--Start of Scriptify head--> \n";
+    echo get_option( 'script_head', '');
+	echo "\n <!--End of Scriptify head--> \n";
+}
+add_action('wp_head', 'add_scriptify_head');
+
+function add_scriptify_body() {
+	echo "\n <!--Start of Scriptify body--> \n";
+    echo get_option( 'script_body', '');
+	echo "\n <!--End of Scriptify body--> \n";
+}
+add_action('wp_body_open', 'add_scriptify_body');
+
+/* Añade el script en el footer */
+function add_scriptify_footer() {
+	echo "\n <!--Start of Scriptify footer--> \n";
+    echo get_option( 'script_footer', '');
+	echo "\n <!--End of Scriptify footer--> \n";
+}
+add_action('wp_footer', 'add_scriptify_footer');
