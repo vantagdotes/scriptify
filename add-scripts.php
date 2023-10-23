@@ -1,7 +1,7 @@
 <?php
 /**
 * Plugin Name: Scripts in Head/Footer/Body
-* Plugin URI: https://www.github.com/josejtax
+* Plugin URI: https://github.com/josejtax/scriptify
 * Description: Allows you to add scripts in the footer, body or header without the need for extensive coding.
 * Version: 0.1
 * Author: jmfernandez.dev
