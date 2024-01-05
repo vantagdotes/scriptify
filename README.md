@@ -36,7 +36,7 @@ This is a simple WordPress plugin that allows you to add content or scripts to t
 
 ## Support
 
-If you need support or have any questions about this plugin, you can contact me through my email [hola@jmfernandez.dev.](mailto:hola@jmfernandez.dev).
+If you need support or have any questions about this plugin, you can contact me through my email [jose@jtax.dev](mailto:jose@jtax.dev).
 
 ## Example
 
