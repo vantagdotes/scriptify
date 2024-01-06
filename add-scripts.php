@@ -4,8 +4,8 @@
 * Plugin URI: https://github.com/josejtax/scriptify
 * Description: Allows you to add scripts in the footer, body or header without the need for extensive coding.
 * Version: 0.1
-* Author: jmfernandez.dev
-* Author URI: mailto:hola@jmfernandez.dev
+* Author: jtax.dev
+* Author URI: https://jtax.dev
 **/
 
 /*Añade al menu del backend la opcion del plugin*/
