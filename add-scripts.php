@@ -1,9 +1,9 @@
 <?php
 /**
-* Plugin Name: Scripts in Head/Footer/Body
+* Plugin Name: Scriptify | Scripts in head/footer/body
 * Plugin URI: https://github.com/josejtax/scriptify
-* Description: Allows you to add scripts in the footer, body or header without the need for extensive coding.
-* Version: 0.1
+* Description: Add global code to your website with Scriptify. Analytics code, new styles, user alerts, and much more.
+* Version: 1
 * Author: jtax.dev
 * Author URI: https://jtax.dev
 **/
