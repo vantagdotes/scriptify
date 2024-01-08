@@ -28,15 +28,15 @@ function front_scriptify() {
 	 ?>
 		<form action="#" method="post">
 			<h3>Head</h3>
-			<textarea style='width: 50%; height: 300px;' value="<?= get_option( 'script_head', '') ?>" name="script_head_options"><?= get_option('script_head', '') ?></textarea>
+			<textarea style='width: 50%; height: 300px;' name="script_head_options"><?= stripslashes(get_option('script_head', '')) ?></textarea>
 			<hr>
 
             <h3>Body</h3>
-			<textarea style='width: 50%; height: 300px;' value="<?= get_option( 'script_body', '') ?>" name="script_body_options"><?= get_option('script_body', '') ?></textarea>
+			<textarea style='width: 50%; height: 300px;' name="script_body_options"><?= stripslashes(get_option('script_body', '')) ?></textarea>
             <hr><br>
 
             <h3>Footer</h3>
-			<textarea style='width: 50%; height: 300px;' value="<?= get_option( 'script_footer', '') ?>" name="script_footer_options"><?= get_option('script_footer', '') ?></textarea>
+			<textarea style='width: 50%; height: 300px;' name="script_footer_options"><?= stripslashes(get_option('script_footer', '')) ?></textarea>
             <br>
 			<input type="submit" value="SAVE">
 		</form>
