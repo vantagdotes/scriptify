@@ -1,10 +1,10 @@
 <?php
 /**
 * Plugin Name: Scriptify | Scripts in head/footer/body
-* Plugin URI: https://github.com/josejtax/scriptify
+* Plugin URI: https://github.com/jt4x/scriptify
 * Description: Add global code to your website with Scriptify. Analytics code, new styles, user alerts, and much more.
 * Version: 1
-* Author: jtax.dev
+* Author: Jose Manuel 'jtax'
 * Author URI: https://jtax.dev
 **/
 

@@ -16,7 +16,7 @@ This is a simple WordPress plugin that allows you to add content or scripts to t
 
 ## Installation
 
-1. Download the ZIP file from this repository. [Download here](https://github.com/josejtax/scriptify/archive/refs/heads/main.zip)
+1. Download the ZIP file from this repository. [Download here](https://github.com/jt4x/scriptify/archive/refs/heads/main.zip)
 
 2. Go to your WordPress admin panel.
 
@@ -44,7 +44,7 @@ To add the Google Analytics tracking code to the `<head>` section of your site, 
 
 ## Contributions
 
-If you want to contribute to this plugin, you are welcome to do so via [repository](https://github.com/josejtax/scriptify).
+If you want to contribute to this plugin, you are welcome to do so via [repository](https://github.com/jt4x/scriptify).
 
 ## License
 
