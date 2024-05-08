@@ -30,7 +30,7 @@ function front_scriptify() {
 	 ?>
 		<form action="#" method="post">
 			<h3>Head</h3>
-			<textarea style='width: 50%; height: 300px;' name="script_head_options"><?= get_option('script_head', '') ?></textarea>
+			<textarea style='width: 50%; height: 300px;' name="script_head_options"><?= stripslashes(get_option('script_head', '')) ?></textarea>
 			<hr>
 
             <h3>Body</h3>
@@ -48,14 +48,14 @@ function front_scriptify() {
 /* Añade el script en el head */
 function add_scriptify_head() {
 	echo "\n <!--Start of Scriptify head--> \n";
-    echo get_option( 'script_head', '');
+    		echo stripslashes(get_option('script_head', '');
 	echo "\n <!--End of Scriptify head--> \n";
 }
 add_action('wp_head', 'add_scriptify_head');
 
 function add_scriptify_body() {
 	echo "\n <!--Start of Scriptify body--> \n";
-    echo get_option( 'script_body', '');
+		echo stripslashes(get_option('script_body', '');
 	echo "\n <!--End of Scriptify body--> \n";
 }
 add_action('wp_body_open', 'add_scriptify_body');
@@ -63,7 +63,7 @@ add_action('wp_body_open', 'add_scriptify_body');
 /* Añade el script en el footer */
 function add_scriptify_footer() {
 	echo "\n <!--Start of Scriptify footer--> \n";
-    echo get_option( 'script_footer', '');
+		echo stripslashes(get_option('script_footer', '');
 	echo "\n <!--End of Scriptify footer--> \n";
 }
 add_action('wp_footer', 'add_scriptify_footer');
