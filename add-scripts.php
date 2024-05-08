@@ -8,6 +8,8 @@
 * Author URI: https://jtax.dev
 **/
 
+defined('ABSPATH') or die('You shouldnt be here...');
+
 /*Añade al menu del backend la opcion del plugin*/
 function vantages_add_backend(){
     add_menu_page( 'Scriptify', 'Scriptify', 'manage_options', 'scriptify', 'front_scriptify' );
