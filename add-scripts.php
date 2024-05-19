@@ -8,7 +8,7 @@
  * Requires PHP:      7.3
  * Author:            Jose Manuel 'jtax'
  * Author URI:        https://jtax.dev
- * License:           GPL v2 or later
+ * License:           GPL v3 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Update URI:        https://github.com/jt4x/scriptify
  * Text Domain:       scriptify
