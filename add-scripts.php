@@ -1,12 +1,18 @@
 <?php
-/**
-* Plugin Name: Scriptify | Scripts in head/footer/body
-* Plugin URI: https://github.com/jt4x/scriptify
-* Description: Add global code to your website with Scriptify. Analytics code, new styles, user alerts, and much more.
-* Version: 1
-* Author: Jose Manuel 'jtax'
-* Author URI: https://jtax.dev
-**/
+/*
+ * Plugin Name:       Scriptify | Scripts in head/footer/body
+ * Plugin URI:        https://github.com/jt4x/scriptify
+ * Description:       Add global code to your website with Scriptify. Analytics code, new styles, user alerts, and much more.
+ * Version:           1
+ * Requires at least: 6.3
+ * Requires PHP:      7.3
+ * Author:            Jose Manuel 'jtax'
+ * Author URI:        https://jtax.dev
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI:        https://github.com/jt4x/scriptify
+ * Text Domain:       scriptify
+ */
 
 defined('ABSPATH') or die('You shouldnt be here...');
 
