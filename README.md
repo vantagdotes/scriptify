@@ -1,8 +1,12 @@
-# WordPress Script Insertion Plugin "Scriptify"
+# Scriptify - Script Insertion
 
+Stable tag: 1.0
 Version: 1.0.0
 License: GPL v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+## Short Description
+ Add global code to your website with Scriptify. Analytics code, new styles, user alerts, and much more.
 
 ## Description
 
