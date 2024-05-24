@@ -16,7 +16,7 @@ This is a simple WordPress plugin that allows you to add content or scripts to t
 
 ## Installation
 
-1. Download the ZIP file from this repository. [Download here](https://github.com/jt4x/scriptify/archive/refs/heads/main.zip)
+1. Download the ZIP file from this repository. [Download here](https://github.com/josejtax/scriptify/archive/refs/heads/main.zip)
 
 2. Go to your WordPress admin panel.
 
