@@ -1,13 +1,13 @@
 <?php
 /*
  * Plugin Name:       Scriptify | Scripts in head/footer/body
- * Plugin URI:        https://github.com/josejtax/scriptify
+ * Plugin URI:        https://github.com/vantagdotes/scriptify
  * Description:       This is a simple WordPress plugin that allows you to add content or scripts to the head, body, or footer of your website quickly and easily. This is useful for inserting scripts from services like Google Analytics or other custom scripts on your WordPress website.
  * Version:           1.0
  * Requires at least: 6.3
  * Requires PHP:      7.3
- * Author:            jtax.dev
- * Author URI:        https://jtax.dev
+ * Author:            VANTAG.es
+ * Author URI:        https://vantag.es
  * License:           GPL v3 or later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       scriptify-main

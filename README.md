@@ -20,7 +20,7 @@ This is a simple WordPress plugin that allows you to add content or scripts to t
 
 ## Installation
 
-1. Download the ZIP file from this repository. [Download here](https://github.com/josejtax/scriptify/archive/refs/heads/main.zip)
+1. Download the ZIP file from this repository. [Download here](https://github.com/vantagdotes/scriptify/archive/refs/heads/main.zip)
 
 2. Go to your WordPress admin panel.
 
@@ -40,7 +40,7 @@ This is a simple WordPress plugin that allows you to add content or scripts to t
 
 ## Support
 
-If you need support or have any questions about this plugin, you can contact me through my email [jose@jtax.dev](mailto:jose@jtax.dev).
+If you need support or have any questions about this plugin, you can contact me through my email [hey@vantag.es](mailto:hey@vantag.es).
 
 ## Example
 
@@ -48,7 +48,7 @@ To add the Google Analytics tracking code to the `<head>` section of your site, 
 
 ## Contributions
 
-If you want to contribute to this plugin, you are welcome to do so via [repository](https://github.com/jt4x/scriptify).
+If you want to contribute to this plugin, you are welcome to do so via [repository](https://github.com/vantagdotes/scriptify).
 
 ## License
 
