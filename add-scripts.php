@@ -2,8 +2,8 @@
 /*
  * Plugin Name:       Scriptify | Scripts in head/footer/body
  * Plugin URI:        https://github.com/vantagdotes/scriptify
- * Description:       This is a simple WordPress plugin that allows you to add content or scripts to the head, body, or footer of your website quickly and easily. This is useful for inserting scripts from services like Google Analytics or other custom scripts on your WordPress website.
- * Version:           1.0
+ * Description:       Advanced WordPress plugin to add custom scripts or content to head, body, or footer with syntax highlighting and toggle options.
+ * Version:           1.1.0
  * Requires at least: 6.3
  * Requires PHP:      7.3
  * Author:            VANTAG.es
@@ -15,60 +15,102 @@
 
 defined('ABSPATH') or die('You shouldnt be here...');
 
-/*Añade al menu del backend la opcion del plugin*/
-function vantages_add_backend(){
-    add_menu_page( 'Scriptify', 'Scriptify', 'manage_options', 'scriptify', 'front_scriptify' );
-}
+// Registrar opciones al activar el plugin
+register_activation_hook(__FILE__, function() {
+    add_option('scriptify_settings', [
+        'head' => ['code' => '', 'active' => true],
+        'body' => ['code' => '', 'active' => true],
+        'footer' => ['code' => '', 'active' => true]
+    ]);
+});
 
+// Añadir menú en el backend
+function vantages_add_backend() {
+    add_menu_page(
+        'Scriptify', 
+        'Scriptify', 
+        'manage_options', 
+        'scriptify', 
+        'front_scriptify',
+        'dashicons-editor-code',
+        80
+    );
+}
 add_action('admin_menu', 'vantages_add_backend');
 
-/*Muestra en el backend las opciones disponibles del plugin*/
+// Cargar recursos del editor (CodeMirror)
+function scriptify_enqueue_assets() {
+    if (!isset($_GET['page']) || $_GET['page'] !== 'scriptify') return;
+
+    // CodeMirror desde CDN
+    wp_enqueue_script('codemirror', 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js', [], '5.65.16', true);
+    wp_enqueue_style('codemirror', 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css', [], '5.65.16');
+    wp_enqueue_script('codemirror-js', 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js', ['codemirror'], '5.65.16', true);
+    
+    // Estilos y scripts personalizados
+    wp_enqueue_style('scriptify-style', plugins_url('assets/style.css', __FILE__), [], '1.1.0');
+    wp_enqueue_script('scriptify-script', plugins_url('assets/script.js', __FILE__), ['jquery', 'codemirror'], '1.1.0', true);
+}
+add_action('admin_enqueue_scripts', 'scriptify_enqueue_assets');
+
+// Interfaz del plugin
 function front_scriptify() {
-	echo "<h1>Scriptify</h1>";
-	echo "<hr style='border: 1px solid #000'>";
-	 if ($_POST) {
-		update_option( 'script_head', $_POST["script_head_options"], '', 'yes' );
-		update_option( 'script_body', $_POST["script_body_options"], '', 'yes' );
-		update_option( 'script_footer', $_POST["script_footer_options"], '', 'yes' );
-	 }
+    if (!current_user_can('manage_options')) {
+        wp_die('You do not have sufficient permissions to access this page.');
+    }
 
-	 ?>
-		<form action="#" method="post">
-			<h3>Head</h3>
-			<textarea style='width: 50%; height: 300px;' name="script_head_options"><?= stripslashes(get_option('script_head', '')) ?></textarea>
-			<hr>
+    if ($_POST && check_admin_referer('scriptify_save')) {
+        $settings = get_option('scriptify_settings', []);
+        $sections = ['head', 'body', 'footer'];
+        
+        foreach ($sections as $section) {
+            $settings[$section]['code'] = isset($_POST["script_{$section}_options"]) 
+                ? wp_kses_post(stripslashes($_POST["script_{$section}_options"])) 
+                : $settings[$section]['code'];
+            $settings[$section]['active'] = isset($_POST["script_{$section}_active"]);
+        }
+        
+        update_option('scriptify_settings', $settings);
+        echo '<div class="notice notice-success"><p>Settings saved successfully!</p></div>';
+    }
 
-            <h3>Body</h3>
-			<textarea style='width: 50%; height: 300px;' name="script_body_options"><?= stripslashes(get_option('script_body', '')) ?></textarea>
-            <hr><br>
-
-            <h3>Footer</h3>
-			<textarea style='width: 50%; height: 300px;' name="script_footer_options"><?= stripslashes(get_option('script_footer', '')) ?></textarea>
-            <br>
-			<input type="submit" value="SAVE">
-		</form>
-	<?php
+    $settings = get_option('scriptify_settings', ['head' => ['code' => '', 'active' => true], 'body' => ['code' => '', 'active' => true], 'footer' => ['code' => '', 'active' => true]]);
+    ?>
+    <div class="wrap scriptify-wrap">
+        <h1>Scriptify</h1>
+        <form method="post" action="">
+            <?php wp_nonce_field('scriptify_save'); ?>
+            <div class="scriptify-tabs">
+                <?php foreach (['head' => 'Head', 'body' => 'Body', 'footer' => 'Footer'] as $key => $label): ?>
+                    <div class="scriptify-tab">
+                        <h2><?php echo esc_html($label); ?></h2>
+                        <div class="scriptify-section">
+                            <label class="switch">
+                                <input type="checkbox" name="script_<?php echo $key; ?>_active" <?php checked($settings[$key]['active']); ?>>
+                                <span class="slider"></span>
+                            </label>
+                            <span>Enable <?php echo $label; ?> Script</span>
+                            <textarea class="scriptify-editor" name="script_<?php echo $key; ?>_options" data-section="<?php echo $key; ?>"><?php echo esc_textarea($settings[$key]['code']); ?></textarea>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <p class="submit"><input type="submit" class="button button-primary" value="Save Changes"></p>
+        </form>
+    </div>
+    <?php
 }
 
-/* Añade el script en el head */
-function add_scriptify_head() {
-	echo "\n <!--Start of Scriptify head--> \n";
-    		echo stripslashes(get_option('script_head', ''));
-	echo "\n <!--End of Scriptify head--> \n";
-}
-add_action('wp_head', 'add_scriptify_head');
+// Inyectar scripts en las ubicaciones correspondientes
+function scriptify_inject($section) {
+    $settings = get_option('scriptify_settings', []);
+    if (!isset($settings[$section]) || !$settings[$section]['active'] || empty(trim($settings[$section]['code']))) return;
 
-function add_scriptify_body() {
-	echo "\n <!--Start of Scriptify body--> \n";
-		echo stripslashes(get_option('script_body', ''));
-	echo "\n <!--End of Scriptify body--> \n";
+    echo "\n<!-- Start of Scriptify {$section} -->\n";
+    echo wp_kses_post($settings[$section]['code']);
+    echo "\n<!-- End of Scriptify {$section} -->\n";
 }
-add_action('wp_body_open', 'add_scriptify_body');
 
-/* Añade el script en el footer */
-function add_scriptify_footer() {
-	echo "\n <!--Start of Scriptify footer--> \n";
-		echo stripslashes(get_option('script_footer', ''));
-	echo "\n <!--End of Scriptify footer--> \n";
-}
-add_action('wp_footer', 'add_scriptify_footer');
+add_action('wp_head', function() { scriptify_inject('head'); });
+add_action('wp_body_open', function() { scriptify_inject('body'); });
+add_action('wp_footer', function() { scriptify_inject('footer'); });
