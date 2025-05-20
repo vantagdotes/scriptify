@@ -10,7 +10,7 @@
  * Author URI:        https://vantag.es
  * License:           GPL v3 or later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       scriptify-main
+ * Text Domain:       scriptify
  */
 
 defined('ABSPATH') or die('You shouldnt be here...');
@@ -34,29 +34,55 @@ add_action('admin_menu', 'vantages_add_backend');
  **/
 
 function front_scriptify() {
-	echo "<h1>Scriptify</h1>";
-	echo "<hr style='border: 1px solid #000'>";
-	 if ($_POST) {
-		update_option( 'script_head', $_POST["script_head_options"], '', 'yes' );
-		update_option( 'script_body', $_POST["script_body_options"], '', 'yes' );
-		update_option( 'script_footer', $_POST["script_footer_options"], '', 'yes' );
-	 }
+	if (!is_admin()) {
+		return;
+	}
 
-	 ?>
-		<form action="#" method="post">
-			<h3>Head</h3>
-			<textarea style='width: 50%; height: 300px;' name="script_head_options"><?= stripslashes(get_option('script_head', '')) ?></textarea>
+	if (isset($_POST['scriptify_nonce'])) {
+		$nonce = filter_input(INPUT_POST, 'scriptify_nonce', FILTER_SANITIZE_STRING);
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'scriptify_save')) {
+			return;
+		}
+
+		if (isset($_POST['script_head_options'])) {
+			$head_content = sanitize_textarea_field(wp_unslash($_POST['script_head_options']));
+			update_option('script_head', $head_content, '', 'yes');
+		}
+
+		if (isset($_POST['script_body_options'])) {
+			$body_content = sanitize_textarea_field(wp_unslash($_POST['script_body_options']));
+			update_option('script_body', $body_content, '', 'yes');
+		}
+
+		if (isset($_POST['script_footer_options'])) {
+			$footer_content = sanitize_textarea_field(wp_unslash($_POST['script_footer_options']));
+			update_option('script_footer', $footer_content, '', 'yes');
+		}
+	}
+
+	?>
+	<div class="wrap">
+		<h1><?php esc_html_e('Scriptify', 'scriptify'); ?></h1>
+		<hr style="border: 1px solid #000">
+		
+		<form action="" method="post">
+			<?php wp_nonce_field('scriptify_save', 'scriptify_nonce'); ?>
+			
+			<h3><?php esc_html_e('Head', 'scriptify'); ?></h3>
+			<textarea style='width: 50%; height: 300px;' name="script_head_options"><?php echo esc_textarea(get_option('script_head', '')); ?></textarea>
 			<hr>
 
-            <h3>Body</h3>
-			<textarea style='width: 50%; height: 300px;' name="script_body_options"><?= stripslashes(get_option('script_body', '')) ?></textarea>
-            <hr><br>
+			<h3><?php esc_html_e('Body', 'scriptify'); ?></h3>
+			<textarea style='width: 50%; height: 300px;' name="script_body_options"><?php echo esc_textarea(get_option('script_body', '')); ?></textarea>
+			<hr>
 
-            <h3>Footer</h3>
-			<textarea style='width: 50%; height: 300px;' name="script_footer_options"><?= stripslashes(get_option('script_footer', '')) ?></textarea>
-            <br>
-			<input type="submit" value="SAVE">
+			<h3><?php esc_html_e('Footer', 'scriptify'); ?></h3>
+			<textarea style='width: 50%; height: 300px;' name="script_footer_options"><?php echo esc_textarea(get_option('script_footer', '')); ?></textarea>
+			<hr>
+
+			<input type="submit" class="button-primary" value="<?php esc_attr_e('Save Changes', 'scriptify'); ?>">
 		</form>
+	</div>
 	<?php
 }
 
@@ -68,7 +94,7 @@ function front_scriptify() {
 
 function add_scriptify_head() {
 	echo "\n <!--Start of Scriptify head--> \n";
-    		echo stripslashes(get_option('script_head', ''));
+			echo wp_kses_post(get_option('script_head', ''));
 	echo "\n <!--End of Scriptify head--> \n";
 }
 add_action('wp_head', 'add_scriptify_head');
@@ -81,7 +107,7 @@ add_action('wp_head', 'add_scriptify_head');
 
 function add_scriptify_body() {
 	echo "\n <!--Start of Scriptify body--> \n";
-		echo stripslashes(get_option('script_body', ''));
+		echo wp_kses_post(get_option('script_body', ''));
 	echo "\n <!--End of Scriptify body--> \n";
 }
 add_action('wp_body_open', 'add_scriptify_body');
@@ -94,7 +120,7 @@ add_action('wp_body_open', 'add_scriptify_body');
 
 function add_scriptify_footer() {
 	echo "\n <!--Start of Scriptify footer--> \n";
-		echo stripslashes(get_option('script_footer', ''));
+		echo wp_kses_post(get_option('script_footer', ''));
 	echo "\n <!--End of Scriptify footer--> \n";
 }
 add_action('wp_footer', 'add_scriptify_footer');

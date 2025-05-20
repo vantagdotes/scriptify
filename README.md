@@ -1,11 +1,44 @@
-# Scriptify - WordPress Script Manager
+=== Scriptify | Scripts & content in head/footer/body ===
+Contributors: vantagdotes
+Donate link: https://vantag.es
+Tags: scripts, head, footer, body, analytics
+Requires at least: 6.3
+Tested up to: 6.8
+Stable tag: 1.0
+License: GPL v3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Easily add scripts or content to the head, body, or footer of your WordPress site.
+
+== Description ==
+Scriptify is a simple and powerful tool for WordPress that allows you to insert code in different parts of your website without the need to edit theme files. It is perfect for adding scripts from services like Google Analytics, custom code or additional CSS styles.
+
+== Short Description ==
+Easily add scripts or content to the head, body, or footer of your WordPress site.
+
+== Installation ==
+1. Download the plugin from WordPress.org
+2. Go to your WordPress admin panel
+3. Navigate to the Plugins section and select "Add New"
+4. Click on the "Upload Plugin" button and select the downloaded ZIP file
+5. Activate the plugin after installation
+
+== Frequently Asked Questions ==
+= Can I use this plugin with any WordPress theme? =
+Yes, Scriptify works with all WordPress themes.
+
+= Is my code safe? =
+Absolutely. All changes are saved in the WordPress database and do not modify your theme files.
+
+== Changelog ==
+= 1.0 =
+* Initial release
+
+== Upgrade Notice ==
+= 1.0 =
+Initial release of Scriptify
 
 [![Stable Version](https://img.shields.io/badge/stable-1.0-brightgreen)](https://github.com/vantagdotes/scriptify)
 [![License](https://img.shields.io/badge/license-GPL%20v3.0-blue)](https://www.gnu.org/licenses/gpl-3.0.html)
-
-## 🚀 What is Scriptify?
-
-Scriptify is a simple and powerful tool for WordPress that allows you to insert code in different parts of your website without the need to edit theme files. It is perfect for adding scripts from services like Google Analytics, custom code or additional CSS styles.
 
 ## 🎯 Features
 
@@ -18,17 +51,6 @@ Scriptify is a simple and powerful tool for WordPress that allows you to insert 
 
 - WordPress 6.3 or higher
 - PHP 8.0 or higher 
-
-## 📦 Installation
-
-1. **Download the plugin**
-   - From your WordPress panel: Plugins > Add New > Search "Scriptify"
-   - Or download manually from GitHub
-
-2. **Install the plugin**
-   - If you downloaded manually:
-     1. Upload the `scriptify` folder to `/wp-content/plugins/`
-     2. Activate the plugin from your WordPress panel
 
 ## 🛠️ Usage
 
